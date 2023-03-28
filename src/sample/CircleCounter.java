@@ -52,7 +52,11 @@ public class CircleCounter extends Application {
         painter.setDaemon(true);
         painter.start();
 
-
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            dataGenerator.killThread();
+            checker.killThread();
+            painter.killThread();
+        });
 
         //vypísanie pomeru guliečiek každú sekundu
         Timeline tm = new Timeline(new KeyFrame(Duration.millis(1000), e ->{lbl.setText("Počet guličiek v kruhu / počet guličiek vo štvorci: "

@@ -4,16 +4,18 @@ public class Checker extends Thread{
 
     DataGenerator dg;
     int rectCount, ovalCount, iterator;
+    private boolean isAlive;
 
     public Checker(DataGenerator dg){
         this.dg = dg;
         rectCount = ovalCount = 0;
         iterator = 0;
+        isAlive = true;
     }
 
     @Override
     public void run() {
-        while (true){
+        while (isAlive){
             //Zaistíme, že toto vlákno vlastní monitor pomocou kľúčového slova keyword
             synchronized (this){
                 //kým sú dáta, ktoré sme ešte nevykreslili tak pokračujeme
@@ -48,7 +50,9 @@ public class Checker extends Thread{
         if (Math.sqrt((x-930)*(x-930) + (y-350)*(y-350)) < 300) return true;
         return false;
     }
-
+    public void killThread(){
+        isAlive = false;
+    }
     public int getRectCount(){return rectCount;}
     public int getOvalCount(){return ovalCount;}
     public int getIterator(){return iterator;}

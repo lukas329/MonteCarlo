@@ -9,17 +9,19 @@ public class Painter extends Thread{
     private final DataGenerator dg;
     double radius;
     int countAll;
+    private boolean isAlive;
     public Painter(GraphicsContext gc, DataGenerator dg) {
         this.gc = gc;
         radius = 5;
         this.dg = dg;
         countAll = 0;
+        isAlive = true;
     }
 
     @Override
     public void run() {
         gc.setFill(Color.BLACK);
-        while (true) {
+        while (isAlive) {
             //Zaistíme, že toto vlákno vlastní monitor pomocou kľúčového slova keyword
             synchronized (this) {
                 //ide, kým sú dáta, ktoré neboli skontrolované
@@ -46,5 +48,8 @@ public class Painter extends Thread{
     //zobudí vlákno
     public void wakeUp(){
         synchronized (this){notify();}
+    }
+    public void killThread(){
+        isAlive = false;
     }
 }

@@ -11,17 +11,19 @@ public class DataGenerator extends Thread{
     private boolean threadGo;
     public ArrayList<Double>listX;
     public ArrayList<Double>listY;
+    private boolean isAlive;
 
     public DataGenerator(){
         listX = new ArrayList<>();
         listY = new ArrayList<>();
+        isAlive = true;
         threadGo = true;
     }
 
     @Override
     public void run() {
         Random random = new Random();
-        while (true) {
+        while (isAlive) {
             //vygenerujeme x a y suradnicu a pridáme do listu
             double x = random.nextDouble() * CANVAS_WIDTH;
             double y = 40 + random.nextDouble() * (CANVAS_HEIGHT-40);
@@ -64,7 +66,9 @@ public class DataGenerator extends Thread{
         synchronized (this){notify();}
 
     }
-
+    public void killThread(){
+        isAlive = false;
+    }
     public ArrayList<Double> getListX(){
         return listX;
     }
