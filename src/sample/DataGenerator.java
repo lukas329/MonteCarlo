@@ -27,6 +27,7 @@ public class DataGenerator extends Thread{
             double y = 40 + random.nextDouble() * (CANVAS_HEIGHT-40);
             listX.add(x);
             listY.add(y);
+            System.out.println("Generujem dáta...");
             try {
                 sleep(90);
             } catch (InterruptedException e) {
@@ -36,7 +37,7 @@ public class DataGenerator extends Thread{
             synchronized (this){
                 while (!threadGo){
                     try {
-                        System.out.println("cakam");
+                        System.out.println("Generovanie dát je pozastavené!");
                         wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();

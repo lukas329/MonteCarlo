@@ -26,7 +26,7 @@ public class Painter extends Thread{
                 if (countAll < dg.getListX().size()){
                     gc.fillOval(dg.getListX().get(countAll), dg.getListY().get(countAll), radius, radius);
                     countAll++;
-                    System.out.println("idem");
+                    System.out.println("Vykresľujem guličky!");
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
